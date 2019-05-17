@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FondoCreateDlg" widgetVar="FondoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFondoTitle}">
+            <h:form id="FondoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fondoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFondoLabel_idFondo}" for="idFondo" />
+                        <p:inputText id="idFondo" value="#{fondoController.selected.idFondo}" title="#{bundle.CreateFondoTitle_idFondo}" required="true" requiredMessage="#{bundle.CreateFondoRequiredMessage_idFondo}"/>
+                        <p:outputLabel value="#{bundle.CreateFondoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{fondoController.selected.nombre}" title="#{bundle.CreateFondoTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateFondoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{fondoController.selected.descripcion}" title="#{bundle.CreateFondoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateFondoLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{fondoController.selected.precio}" title="#{bundle.CreateFondoTitle_precio}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fondoController.create}" value="#{bundle.Save}" update="display,:FondoListForm:datalist,:growl" oncomplete="handleSubmit(args,'FondoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FondoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

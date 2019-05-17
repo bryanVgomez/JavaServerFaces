@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BebestiblesEditDlg" widgetVar="BebestiblesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBebestiblesTitle}">
+            <h:form id="BebestiblesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bebestiblesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBebestiblesLabel_idBebestibles}" for="idBebestibles" />
+                        <p:inputText id="idBebestibles" value="#{bebestiblesController.selected.idBebestibles}" title="#{bundle.EditBebestiblesTitle_idBebestibles}" required="true" requiredMessage="#{bundle.EditBebestiblesRequiredMessage_idBebestibles}"/>
+                        <p:outputLabel value="#{bundle.EditBebestiblesLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{bebestiblesController.selected.descripcion}" title="#{bundle.EditBebestiblesTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditBebestiblesLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{bebestiblesController.selected.nombre}" title="#{bundle.EditBebestiblesTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditBebestiblesLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{bebestiblesController.selected.precio}" title="#{bundle.EditBebestiblesTitle_precio}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bebestiblesController.update}" value="#{bundle.Save}" update="display,:BebestiblesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BebestiblesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BebestiblesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
